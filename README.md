@@ -1,5 +1,5 @@
 # sudoku_game2
-A simple game buikt with Python for practice and learning the functions and loops better.
+A simple game built with Python for practice and learning the functions and loops better.
 
 ## About
 This project generates a valid Sudoku board, allows user input, and checks the solution for correctness. It was created as a first ear computer engineering student project to improve programming mindset and algotihmic thinking.
