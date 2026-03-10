@@ -2,7 +2,7 @@
 A simple game built with Python for practice and learning the functions and loops better.
 
 ## About
-This project generates a valid Sudoku board, allows user input, and checks the solution for correctness. It was created as a first ear computer engineering student project to improve programming mindset and algotihmic thinking.
+This project allows a valid Sudoku board, allows user input, and checks the solution for correctness. It was created as a first year computer engineering student project to improve programming mindset and algorithmic thinking.
 
 ## Features 
 1. Generates a valid Sudoku Board.
