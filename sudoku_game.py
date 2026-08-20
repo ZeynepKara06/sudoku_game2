@@ -1,5 +1,5 @@
 def print_board(puzzle):
-    print("\nCurrent Board:")              #board u yazdırıyor.
+    print("\nCurrent Board:")              #output the board.
     for i in range(9):
         if i % 3 == 0 and i != 0:
             print("-" * 21)
@@ -13,17 +13,17 @@ def print_board(puzzle):
 
 
 def find_empty(puzzle):
-    for r in range(9):       #row ve colomb da orda bir sayı var mı diye bakıyruz.
+    for r in range(9):       #checking the row and columns.
         for c in range(9):
             if puzzle [r][c] == -1:
                  return r, c
     return None,None       
 
 def is_valid(puzzle,guess,row,col):
-    row_vals = puzzle[row]     #verdiğimiz değer puzzle ın rowlarında var mı diye bakıyoruz.
+    row_vals = puzzle[row]     #checking if the value we provided is in the row.
     if guess in row_vals:
         return False
-    col_vals = [puzzle[i][col]  for i in range(9)]      #aynısı ama coloumn u kontorl ediyoıruz.
+    col_vals = [puzzle[i][col]  for i in range(9)]      #checking if the value we provided is in the column.
     if guess in col_vals:
         return False 
     row_start= (row//3) * 3
@@ -36,7 +36,7 @@ def is_valid(puzzle,guess,row,col):
 
 def solve_sudoku(puzzle):
     row,col = find_empty(puzzle)
-    if row is None:     #bütün yerler dolduysa oyun biter
+    if row is None:     #no empty space left, puzzle solved
         return True
     
     for guess in range(1, 10):
@@ -44,42 +44,42 @@ def solve_sudoku(puzzle):
             puzzle[row][col] = guess
             if solve_sudoku(puzzle):
                 return True
-            #eğer değerimiz ya da tahminimiz problemi çözmüyorsa o zaman, yeni bir numara denemeliyiz.
+            #if our guess didn't solve the puzzle, we need to try a new number.
     
-        puzzle[row][col] = -1     #guessi resetliyoruz
-    return False     #başka sayı girsekte çözülmüyorsa o zaman sudoku çözülemezdir.
+        puzzle[row][col] = -1     #resetting the guess because it didn't work out.
+    return False     #even if we try all numbers, if it doesn't solve, then the sudoku is unsolvable.
 
 def get_user_move():
-    try:                                        #kullanıcıdan sayı alıyoruz
+    try:                                        #getting user input
         row = int(input("Row (0-8): "))
         col = int(input("Col (0-8): "))
         value = int(input("Value (1-9): "))
         return row, col, value                      
     except ValueError:
-        print("Only Numbers,Please")               #number var mıdiye kontrol ediyor.
+        print("Only Numbers,Please")               #checking if the user input is valid or not.
         return None, None, None
     
-def is_complete(puzzle):               #oyunda herhangi bir kutuda boşluk var mı diye kontrol eder.
+def is_complete(puzzle):               #checking if there are any empty spaces left in the puzzle.
     for row in puzzle:
         if -1 in row:
             return False
     return True
 
 
-def play_sudoku(puzzle):       #oyunu temel yazdıran fonksiyon
+def play_sudoku(puzzle):       #the main function to play the sudoku game
     while True:
         print_board(puzzle)
 
         if is_complete(puzzle):
-            print("WELL DONE,YOU COMPLETEDE THE SUDOKU!!.")    #oyun tamamlanmış mı diye her sefrinde kontorl eder,boşluk yoksa devam eder varsa break ile çıkar.
+            print("WELL DONE,YOU COMPLETEDE THE SUDOKU!!.")    #checking if the game is completed, if so, break the loop.
             break
 
-        row, col, value = get_user_move()        #row ve col ini değer yazıdrma fonksiyonunu çağırıyor.
+        row, col, value = get_user_move()        #calling the function to get user input.
 
         if row is None:      
             continue
 
-        if not (0 <= row <= 8 and 0 <= col <= 8 and 1 <= value <= 9):     #alınan değer aralıkta mı bakıyoruz.
+        if not (0 <= row <= 8 and 0 <= col <= 8 and 1 <= value <= 9):     #checking if the value is within the valid range.
             print("Value out of range .")
             continue
 
